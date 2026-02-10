@@ -1,0 +1,177 @@
+.stat-page {
+  min-height: 100vh;
+  padding-bottom: 70px;
+  background-color: #f5f5f5;
+}
+
+.header {
+  background-color: #07c160;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.stat-content {
+  padding: 15px;
+}
+
+.expense-summary {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.expense-summary h2 {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.total-expense {
+  padding: 20px 0;
+}
+
+.expense-label {
+  display: block;
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.expense-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+}
+
+.category-stat,
+.source-stat,
+.item-stat {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.category-stat h3,
+.source-stat h3,
+.item-stat h3 {
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-name {
+  width: 60px;
+  font-size: 14px;
+  color: #666;
+}
+
+.category-bar {
+  flex: 1;
+  height: 8px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.category-progress {
+  height: 100%;
+  background-color: #07c160;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.category-amount {
+  width: 80px;
+  text-align: right;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.source-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.source-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.source-item:last-child {
+  border-bottom: none;
+}
+
+.source-name {
+  font-size: 14px;
+  color: #666;
+}
+
+.source-amount {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.item-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.item-stat-item {
+  text-align: center;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.item-stat-value {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.item-stat-value.expiring {
+  color: #ff4d4f;
+}
+
+.item-stat-label {
+  font-size: 12px;
+  color: #999;
+}

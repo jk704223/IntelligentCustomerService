@@ -5,6 +5,7 @@ import CustomerView from './views/CustomerView';
 import BossView from './views/BossView';
 import CustomerServiceView from './views/CustomerServiceView';
 import OperationView from './views/OperationView';
+import InteractionFlowView from './views/InteractionFlowView';
 import './App.css';
 
 interface Ticket {
@@ -143,6 +144,10 @@ function App() {
                 key: 'operation',
                 label: <Link to="/operation">运营视角</Link>,
               },
+              {
+                key: 'interaction-flow',
+                label: <Link to="/interaction-flow">客户售后交互流程</Link>,
+              },
             ]}
             style={{ flex: 1, minWidth: 0 }}
           />
@@ -153,6 +158,7 @@ function App() {
             <Route path="/boss" element={<BossView tickets={tickets} setTickets={setTickets} />} />
             <Route path="/customer-service" element={<CustomerServiceView tickets={tickets} setTickets={setTickets} />} />
             <Route path="/operation" element={<OperationView tickets={tickets} setTickets={setTickets} />} />
+            <Route path="/interaction-flow" element={<InteractionFlowView />} />
           </Routes>
         </div>
         <Footer style={{ textAlign: 'center', position: 'relative', zIndex: 10 }}>智能客服系统 ©{new Date().getFullYear()} Created by 高级软件工程师</Footer>

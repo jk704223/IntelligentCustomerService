@@ -1,0 +1,279 @@
+.index-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 16px;
+  color: #666;
+}
+
+/* 用户信息区域 */
+.user-info {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #1890ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.avatar-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.user-details h2 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 4px 0;
+}
+
+.user-details p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* 状态卡片 */
+.status-cards {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.status-card {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-content {
+  flex: 1;
+}
+
+.status-number {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.status-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.status-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-icon.pending {
+  background-color: #fff7e6;
+}
+
+.status-icon.message {
+  background-color: #e6f7ff;
+}
+
+/* 快捷操作 */
+.quick-actions {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.action-item:hover {
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.action-icon.customer {
+  background-color: #e6f7ff;
+}
+
+.action-icon.ticket {
+  background-color: #fff7e6;
+}
+
+.action-icon.msg {
+  background-color: #f6ffed;
+}
+
+.action-icon.profile {
+  background-color: #fff0f5;
+}
+
+.icon-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1890ff;
+}
+
+.action-label {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+
+/* 数据概览 */
+.data-overview {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.overview-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.overview-item {
+  text-align: center;
+  padding: 12px 8px;
+  background-color: #fafafa;
+  border-radius: 4px;
+}
+
+.overview-number {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1890ff;
+  margin-bottom: 4px;
+}
+
+.overview-label {
+  font-size: 12px;
+  color: #666;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .index-container {
+    padding: 12px;
+  }
+
+  .user-info {
+    padding: 16px;
+  }
+
+  .user-avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .avatar-text {
+    font-size: 20px;
+  }
+
+  .user-details h2 {
+    font-size: 16px;
+  }
+
+  .status-cards {
+    gap: 8px;
+  }
+
+  .status-card {
+    padding: 12px;
+  }
+
+  .status-number {
+    font-size: 20px;
+  }
+
+  .action-grid {
+    gap: 12px;
+  }
+
+  .action-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .icon-text {
+    font-size: 18px;
+  }
+
+  .overview-grid {
+    gap: 8px;
+  }
+
+  .overview-item {
+    padding: 10px 6px;
+  }
+
+  .overview-number {
+    font-size: 16px;
+  }
+}

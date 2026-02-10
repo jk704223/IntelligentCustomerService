@@ -1,0 +1,21 @@
+{
+  "name": "web-app-tester",
+  "version": "1.0.0",
+  "description": "Web application testing tool with login handling, page exploration, and automated testing",
+  "main": "test.js",
+  "scripts": {
+    "test": "node test.js",
+    "install:browser": "npx puppeteer browsers install chrome"
+  },
+  "dependencies": {
+    "puppeteer": "^22.0.0"
+  },
+  "keywords": [
+    "testing",
+    "web",
+    "automation",
+    "puppeteer"
+  ],
+  "author": "",
+  "license": "MIT"
+}

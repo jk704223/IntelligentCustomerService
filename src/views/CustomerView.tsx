@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Input, Button, message, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
@@ -73,7 +73,7 @@ const CustomerView: React.FC<CustomerViewProps> = ({ addTicket, tickets: propsTi
     y: window.innerHeight - 92  // 视窗高度减去按钮高度和边距
   }));
   const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [floatButtonDragOffset, setFloatButtonDragOffset] = useState({ x: 0, y: 0 });
   
   // 消息通知数据
   const [notifications] = useState([
@@ -285,7 +285,7 @@ const CustomerView: React.FC<CustomerViewProps> = ({ addTicket, tickets: propsTi
           dataIndex: 'title',
           key: 'title',
           ellipsis: true,
-          flex: 1,
+          width: '200px',
         },
         {
           title: '状态',
@@ -379,7 +379,7 @@ const CustomerView: React.FC<CustomerViewProps> = ({ addTicket, tickets: propsTi
     sendBotMessage('请回复以下选项：\n1. 满意\n2. 转人工');
   };
 
-  const sendBotMessage = (content: string) => {
+  const sendBotMessage = (content: string | React.ReactNode) => {
     const botReply: Message = {
       id: (Date.now() + 1).toString(),
       content: content,
@@ -435,7 +435,7 @@ const CustomerView: React.FC<CustomerViewProps> = ({ addTicket, tickets: propsTi
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsDragging(true);
-    setDragOffset({
+    setFloatButtonDragOffset({
       x: e.clientX - floatButtonPosition.x,
       y: e.clientY - floatButtonPosition.y
     });
@@ -447,8 +447,8 @@ const CustomerView: React.FC<CustomerViewProps> = ({ addTicket, tickets: propsTi
   const handleGlobalMouseMove = (e: MouseEvent) => {
     if (!isDragging) return;
     
-    const newX = e.clientX - dragOffset.x;
-    const newY = e.clientY - dragOffset.y;
+    const newX = e.clientX - floatButtonDragOffset.x;
+    const newY = e.clientY - floatButtonDragOffset.y;
     
     // 限制在视窗内
     const maxX = window.innerWidth - 60;
@@ -474,10 +474,189 @@ const CustomerView: React.FC<CustomerViewProps> = ({ addTicket, tickets: propsTi
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', margin: 0, padding: 0, overflow: 'hidden' }}>
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
-        {/* 左侧软件展示区域 */}
+        {/* 左侧聊天区域 */}
+        {isExpanded && (
+          <div style={{ 
+            width: '30%', 
+            minWidth: 400, 
+            borderRight: '1px solid #e8e8e8', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            backgroundColor: '#fafafa',
+            transition: 'all 0.3s ease',
+            opacity: 1,
+            transform: 'translateX(0)'
+          }}>
+            <div style={{ padding: 16, borderBottom: '1px solid #e8e8e8', backgroundColor: '#fff' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                <h3 style={{ margin: 0 }}>智能客服</h3>
+                <Input
+                  placeholder="搜索会话记录..."
+                  style={{ width: 200 }}
+                  value={searchKeyword}
+                  onChange={e => setSearchKeyword(e.target.value)}
+                />
+              </div>
+              {/* 消息轮播 */}
+              <div style={{ 
+                backgroundColor: '#f0f8ff', 
+                border: '1px solid #e1f5fe', 
+                borderRadius: 4, 
+                padding: 12,
+                marginBottom: 12,
+                overflow: 'hidden',
+                position: 'relative'
+              }}>
+                <div 
+                  style={{ 
+                    display: 'flex',
+                    animation: 'marquee 15s linear infinite',
+                    whiteSpace: 'nowrap',
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    width: '200%'
+                  }}
+                >
+                  {notifications.map(notification => (
+                    <span key={notification.id} style={{ marginRight: '30px', color: '#1890ff' }}>
+                      {notification.content}
+                    </span>
+                  ))}
+                  {/* 重复一遍通知，实现无缝滚动 */}
+                  {notifications.map(notification => (
+                    <span key={`${notification.id}-copy`} style={{ marginRight: '30px', color: '#1890ff' }}>
+                      {notification.content}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* 聊天消息区域 */}
+            <div style={{ flex: 1, overflow: 'auto', padding: 16, borderBottom: '1px solid #e8e8e8' }}>
+              {messages
+                .filter(message => {
+                  if (!searchKeyword.trim()) return true;
+                  if (typeof message.content === 'string') {
+                    return message.content.toLowerCase().includes(searchKeyword.toLowerCase());
+                  }
+                  return false;
+                })
+                .map(message => (
+                <div key={message.id} style={{ marginBottom: 20, display: 'flex', flexDirection: 'column', alignItems: message.type === 'user' ? 'flex-end' : 'flex-start' }}>
+                  {typeof message.content === 'string' ? (
+                    <div style={{
+                      maxWidth: '70%',
+                      padding: '12px 16px',
+                      borderRadius: '18px',
+                      wordWrap: 'break-word',
+                      backgroundColor: message.type === 'user' ? '#1890ff' : '#f0f0f0',
+                      color: message.type === 'user' ? 'white' : '#333',
+                      borderBottomRightRadius: message.type === 'user' ? '4px' : '18px',
+                      borderBottomLeftRadius: message.type === 'user' ? '18px' : '4px',
+                      boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
+                    }}>{message.content}</div>
+                  ) : (
+                    <div style={{
+                      width: '100%',
+                      maxWidth: '90%',
+                      padding: '12px 16px',
+                      borderRadius: '8px',
+                      backgroundColor: '#f0f0f0',
+                      boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
+                    }}>{message.content}</div>
+                  )}
+                  <div style={{ fontSize: 12, color: '#999', marginTop: 6, marginLeft: message.type === 'user' ? 0 : '12px', marginRight: message.type === 'user' ? '12px' : 0 }}>
+                    {message.timestamp.toLocaleString()}
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* 下方输入区域 */}
+            <div style={{ padding: 16, borderTop: '1px solid #e8e8e8', backgroundColor: '#fff' }}>
+              {/* 问题类型按钮 */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
+                <Button
+                  type="primary"
+                  size="small"
+                  onClick={() => {
+                    setInputValue('系统错误');
+                    handleSendMessage();
+                  }}
+                  style={{ padding: '4px 12px', fontWeight: 'bold' }}
+                >
+                  系统错误
+                </Button>
+                <Button
+                  type="primary"
+                  size="small"
+                  onClick={() => {
+                    setInputValue('产品建议');
+                    handleSendMessage();
+                  }}
+                  style={{ padding: '4px 12px', fontWeight: 'bold' }}
+                >
+                  产品建议
+                </Button>
+                <Button
+                  type="primary"
+                  size="small"
+                  onClick={() => {
+                    setInputValue('变更主账号');
+                    handleSendMessage();
+                  }}
+                  style={{ padding: '4px 12px', fontWeight: 'bold' }}
+                >
+                  变更主账号
+                </Button>
+                <Button
+                  type="primary"
+                  size="small"
+                  onClick={() => {
+                    setInputValue('升级版本');
+                    handleSendMessage();
+                  }}
+                  style={{ padding: '4px 12px', fontWeight: 'bold' }}
+                >
+                  软件升级
+                </Button>
+                <Button
+                  type="primary"
+                  size="small"
+                  onClick={() => {
+                    setInputValue('需要培训');
+                    handleSendMessage();
+                  }}
+                  style={{ padding: '4px 12px', fontWeight: 'bold' }}
+                >
+                  培训实施
+                </Button>
+              </div>
+              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                <Input
+                  value={inputValue}
+                  onChange={e => setInputValue(e.target.value)}
+                  placeholder="请输入您的问题..."
+                  onPressEnter={handleSendMessage}
+                  style={{ flex: 1, height: 32 }}
+                />
+                <Button type="default" onClick={handleScreenshot} style={{ height: 32, padding: '0 16px' }}>
+                  截图
+                </Button>
+                <Button type="primary" onClick={handleSendMessage} style={{ height: 32, padding: '0 16px' }}>
+                  发送
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 右侧软件展示区域 */}
         <div style={{ 
           flex: 1, 
-          borderRight: '1px solid #e8e8e8', 
+          borderLeft: isExpanded ? '1px solid #e8e8e8' : 'none', 
           display: 'flex', 
           flexDirection: 'column', 
           backgroundColor: '#fff',
@@ -634,183 +813,6 @@ const CustomerView: React.FC<CustomerViewProps> = ({ addTicket, tickets: propsTi
             </div>
           )}
         </div>
-
-        {/* 右侧聊天区域 */}
-        {isExpanded && (
-          <div style={{ 
-            width: '30%', 
-            minWidth: 400, 
-            borderLeft: '1px solid #e8e8e8', 
-            display: 'flex', 
-            flexDirection: 'column', 
-            backgroundColor: '#fafafa',
-            transition: 'all 0.3s ease',
-            opacity: 1,
-            transform: 'translateX(0)'
-          }}>
-            <div style={{ padding: 16, borderBottom: '1px solid #e8e8e8', backgroundColor: '#fff' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                <h3 style={{ margin: 0 }}>智能客服</h3>
-                <Input
-                  placeholder="搜索会话记录..."
-                  style={{ width: 200 }}
-                  value={searchKeyword}
-                  onChange={e => setSearchKeyword(e.target.value)}
-                />
-              </div>
-              {/* 消息轮播 */}
-              <div style={{ 
-                backgroundColor: '#f0f8ff', 
-                border: '1px solid #e1f5fe', 
-                borderRadius: 4, 
-                padding: 12,
-                marginBottom: 12,
-                overflow: 'hidden',
-                position: 'relative'
-              }}>
-                <div 
-                  style={{ 
-                    display: 'flex',
-                    animation: 'marquee 15s linear infinite',
-                    whiteSpace: 'nowrap',
-                    position: 'absolute',
-                    left: 0,
-                    top: 0,
-                    width: '200%'
-                  }}
-                >
-                  {notifications.map(notification => (
-                    <span key={notification.id} style={{ marginRight: '30px', color: '#1890ff' }}>
-                      {notification.content}
-                    </span>
-                  ))}
-                  {/* 重复一遍通知，实现无缝滚动 */}
-                  {notifications.map(notification => (
-                    <span key={`${notification.id}-copy`} style={{ marginRight: '30px', color: '#1890ff' }}>
-                      {notification.content}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div style={{ flex: 1, overflow: 'auto', padding: 16, borderBottom: '1px solid #e8e8e8' }}>
-              {messages
-                .filter(message => {
-                  if (!searchKeyword.trim()) return true;
-                  if (typeof message.content === 'string') {
-                    return message.content.toLowerCase().includes(searchKeyword.toLowerCase());
-                  }
-                  return false;
-                })
-                .map(message => (
-                <div key={message.id} style={{ marginBottom: 20, display: 'flex', flexDirection: 'column', alignItems: message.type === 'user' ? 'flex-end' : 'flex-start' }}>
-                  {typeof message.content === 'string' ? (
-                    <div style={{
-                      maxWidth: '70%',
-                      padding: '12px 16px',
-                      borderRadius: '18px',
-                      wordWrap: 'break-word',
-                      backgroundColor: message.type === 'user' ? '#1890ff' : '#f0f0f0',
-                      color: message.type === 'user' ? 'white' : '#333',
-                      borderBottomRightRadius: message.type === 'user' ? '4px' : '18px',
-                      borderBottomLeftRadius: message.type === 'user' ? '18px' : '4px',
-                      boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
-                    }}>{message.content}</div>
-                  ) : (
-                    <div style={{
-                      width: '100%',
-                      maxWidth: '90%',
-                      padding: '12px 16px',
-                      borderRadius: '8px',
-                      backgroundColor: '#f0f0f0',
-                      boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
-                    }}>{message.content}</div>
-                  )}
-                  <div style={{ fontSize: 12, color: '#999', marginTop: 6, marginLeft: message.type === 'user' ? 0 : '12px', marginRight: message.type === 'user' ? '12px' : 0 }}>
-                    {message.timestamp.toLocaleString()}
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            {/* 下方输入区域 */}
-            <div style={{ padding: 16, borderTop: '1px solid #e8e8e8', backgroundColor: '#fff' }}>
-              {/* 问题类型按钮 */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
-                <Button
-                  type="primary"
-                  size="small"
-                  onClick={() => {
-                    setInputValue('系统错误');
-                    handleSendMessage();
-                  }}
-                  style={{ padding: '4px 12px', fontWeight: 'bold' }}
-                >
-                  系统错误
-                </Button>
-                <Button
-                  type="primary"
-                  size="small"
-                  onClick={() => {
-                    setInputValue('产品建议');
-                    handleSendMessage();
-                  }}
-                  style={{ padding: '4px 12px', fontWeight: 'bold' }}
-                >
-                  产品建议
-                </Button>
-                <Button
-                  type="primary"
-                  size="small"
-                  onClick={() => {
-                    setInputValue('变更主账号');
-                    handleSendMessage();
-                  }}
-                  style={{ padding: '4px 12px', fontWeight: 'bold' }}
-                >
-                  变更主账号
-                </Button>
-                <Button
-                  type="primary"
-                  size="small"
-                  onClick={() => {
-                    setInputValue('升级版本');
-                    handleSendMessage();
-                  }}
-                  style={{ padding: '4px 12px', fontWeight: 'bold' }}
-                >
-                  软件升级
-                </Button>
-                <Button
-                  type="primary"
-                  size="small"
-                  onClick={() => {
-                    setInputValue('需要培训');
-                    handleSendMessage();
-                  }}
-                  style={{ padding: '4px 12px', fontWeight: 'bold' }}
-                >
-                  培训实施
-                </Button>
-              </div>
-              <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                <Input
-                  value={inputValue}
-                  onChange={e => setInputValue(e.target.value)}
-                  placeholder="请输入您的问题..."
-                  onPressEnter={handleSendMessage}
-                  style={{ flex: 1, height: 32 }}
-                />
-                <Button type="default" onClick={handleScreenshot} style={{ height: 32, padding: '0 16px' }}>
-                  截图
-                </Button>
-                <Button type="primary" onClick={handleSendMessage} style={{ height: 32, padding: '0 16px' }}>
-                  发送
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
       
       {/* 圆形悬浮框 */}

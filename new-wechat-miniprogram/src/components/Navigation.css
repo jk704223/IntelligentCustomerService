@@ -1,0 +1,71 @@
+.navigation {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: #fff;
+  border-top: 1px solid #eaeaea;
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  color: #999;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.nav-item.active {
+  color: #07c160;
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 模拟图标 */
+.home-icon {
+  background-color: #999;
+  border-radius: 4px;
+}
+
+.account-icon {
+  background-color: #999;
+  border-radius: 4px;
+}
+
+.item-icon {
+  background-color: #999;
+  border-radius: 4px;
+}
+
+.stat-icon {
+  background-color: #999;
+  border-radius: 4px;
+}
+
+.settings-icon {
+  background-color: #999;
+  border-radius: 4px;
+}
+
+.nav-item.active .home-icon,
+.nav-item.active .account-icon,
+.nav-item.active .item-icon,
+.nav-item.active .stat-icon,
+.nav-item.active .settings-icon {
+  background-color: #07c160;
+}

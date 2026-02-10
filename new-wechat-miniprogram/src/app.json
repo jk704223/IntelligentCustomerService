@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/记账/记账",
+    "pages/记账详情/记账详情",
+    "pages/记物/记物",
+    "pages/记物详情/记物详情",
+    "pages/统计/统计"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#07c160",
+    "navigationBarTitleText": "简易记账",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#07c160",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/icon_home.png",
+        "selectedIconPath": "assets/icon_home_selected.png"
+      },
+      {
+        "pagePath": "pages/记账/记账",
+        "text": "记账",
+        "iconPath": "assets/icon_account.png",
+        "selectedIconPath": "assets/icon_account_selected.png"
+      },
+      {
+        "pagePath": "pages/记物/记物",
+        "text": "记物",
+        "iconPath": "assets/icon_item.png",
+        "selectedIconPath": "assets/icon_item_selected.png"
+      },
+      {
+        "pagePath": "pages/统计/统计",
+        "text": "统计",
+        "iconPath": "assets/icon_stat.png",
+        "selectedIconPath": "assets/icon_stat_selected.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

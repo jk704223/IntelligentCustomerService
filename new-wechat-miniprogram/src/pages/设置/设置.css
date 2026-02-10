@@ -1,0 +1,376 @@
+.settings-page {
+  min-height: 100vh;
+  padding-bottom: 70px;
+  background-color: #f5f5f5;
+}
+
+.header {
+  background-color: #07c160;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.settings-content {
+  padding: 15px;
+}
+
+.settings-section {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.settings-section h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  margin: 0;
+}
+
+.settings-section h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  padding: 10px 15px 0;
+  margin: 0;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.setting-item:last-child {
+  border-bottom: none;
+}
+
+.setting-item label {
+  font-size: 14px;
+  color: #333;
+  flex: 1;
+}
+
+.setting-item input[type="text"],
+.setting-item input[type="tel"],
+.setting-item input[type="email"],
+.setting-item select {
+  width: 150px;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  text-align: right;
+  transition: all 0.2s ease;
+}
+
+.setting-item input[type="text"]:focus,
+.setting-item input[type="tel"]:focus,
+.setting-item input[type="email"]:focus,
+.setting-item select:focus {
+  outline: none;
+  border-color: #07c160;
+  box-shadow: 0 0 0 2px rgba(7, 193, 96, 0.1);
+}
+
+/* 头像上传 */
+.avatar-upload {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f0f0f0;
+}
+
+.avatar-input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.avatar-upload-btn {
+  margin-left: 15px;
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.avatar-upload-btn:hover {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+/* 切换开关 */
+.toggle-item {
+  position: relative;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #07c160;
+}
+
+input:focus + .toggle-slider {
+  box-shadow: 0 0 1px #07c160;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+/* 预算输入 */
+.budget-input {
+  position: relative;
+  width: 150px;
+}
+
+.budget-input .currency-symbol {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #666;
+  z-index: 1;
+}
+
+.budget-input input {
+  width: 100%;
+  padding: 8px 12px 8px 24px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+  text-align: right;
+  transition: all 0.2s ease;
+}
+
+.budget-input input:focus {
+  outline: none;
+  border-color: #07c160;
+  box-shadow: 0 0 0 2px rgba(7, 193, 96, 0.1);
+}
+
+/* 分类预算 */
+.category-budgets {
+  padding-bottom: 15px;
+}
+
+/* 数据管理 */
+.data-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+}
+
+.action-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.export-btn {
+  background-color: #409eff;
+  color: white;
+}
+
+.export-btn:hover {
+  background-color: #66b1ff;
+  box-shadow: 0 2px 4px rgba(64, 158, 255, 0.3);
+}
+
+.import-btn {
+  background-color: #67c23a;
+  color: white;
+}
+
+.import-btn:hover {
+  background-color: #85ce61;
+  box-shadow: 0 2px 4px rgba(103, 194, 58, 0.3);
+}
+
+.danger-btn {
+  background-color: #f56c6c;
+  color: white;
+}
+
+.danger-btn:hover {
+  background-color: #f78989;
+  box-shadow: 0 2px 4px rgba(245, 108, 108, 0.3);
+}
+
+.file-input {
+  display: none;
+}
+
+/* 版本信息 */
+.version-info,
+.developer-info {
+  font-size: 14px;
+  color: #666;
+}
+
+.feedback-link {
+  font-size: 14px;
+  color: #409eff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.feedback-link:hover {
+  color: #66b1ff;
+  text-decoration: underline;
+}
+
+/* 响应式设计 */
+@media (max-width: 375px) {
+  .settings-content {
+    padding: 10px;
+  }
+  
+  .setting-item {
+    padding: 12px;
+  }
+  
+  .setting-item input[type="text"],
+  .setting-item input[type="tel"],
+  .setting-item input[type="email"],
+  .setting-item select,
+  .budget-input {
+    width: 120px;
+  }
+  
+  .setting-item input[type="text"]::placeholder,
+  .setting-item input[type="tel"]::placeholder,
+  .setting-item input[type="email"]::placeholder {
+    font-size: 12px;
+  }
+  
+  .avatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .avatar-upload-btn {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+/* 动画效果 */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.action-btn:active {
+  animation: pulse 0.2s ease-in-out;
+}
+
+/* 加载状态 */
+.loading {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #07c160;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

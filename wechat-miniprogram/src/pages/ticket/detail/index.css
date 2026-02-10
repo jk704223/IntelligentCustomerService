@@ -1,0 +1,445 @@
+.ticket-detail-container {
+  padding: 16px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* 加载和空状态 */
+.loading, .empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  font-size: 16px;
+  color: #999;
+}
+
+/* 工单头部信息 */
+.ticket-header-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ticket-title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.ticket-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  flex: 1;
+  margin-right: 12px;
+}
+
+.ticket-status {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ticket-status-open {
+  background-color: #fff1f0;
+  color: #cf1322;
+  border: 1px solid #ffccc7;
+}
+
+.ticket-status-processing {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  border: 1px solid #91d5ff;
+}
+
+.ticket-status-resolved {
+  background-color: #f6ffed;
+  color: #52c41a;
+  border: 1px solid #b7eb8f;
+}
+
+.ticket-meta-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.meta-label {
+  color: #999;
+  margin-right: 4px;
+}
+
+.meta-value {
+  color: #333;
+  font-weight: 500;
+}
+
+.ticket-date-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: #666;
+}
+
+.escalation-badge {
+  display: flex;
+  align-items: center;
+  background-color: #fff2e8;
+  border: 1px solid #ffd591;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-top: 8px;
+}
+
+.escalation-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.escalation-text {
+  color: #fa8c16;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 工单内容 */
+.ticket-content-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+  border-left: 4px solid #1890ff;
+  padding-left: 8px;
+}
+
+.ticket-content {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.ticket-content p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* 互动记录 */
+.ticket-interactions-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.interactions-list {
+  gap: 16px;
+}
+
+.interaction-item {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.interaction-item.system {
+  background-color: #f0f0f0;
+}
+
+.interaction-item.customer {
+  background-color: #f6ffed;
+  border-left: 4px solid #52c41a;
+}
+
+.interaction-item.service_provider {
+  background-color: #e6f7ff;
+  border-left: 4px solid #1890ff;
+}
+
+.interaction-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.interaction-author {
+  font-weight: 500;
+  color: #333;
+  margin-right: 12px;
+}
+
+.interaction-time {
+  color: #999;
+  margin-right: 12px;
+}
+
+.interaction-type-tag {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.interaction-type-tag.system {
+  background-color: #999;
+  color: #fff;
+}
+
+.interaction-type-tag.customer {
+  background-color: #52c41a;
+  color: #fff;
+}
+
+.interaction-type-tag.service_provider {
+  background-color: #1890ff;
+  color: #fff;
+}
+
+.interaction-content {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.interaction-content p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* 解决方案 */
+.ticket-resolution-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ticket-resolution {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #f6ffed;
+  padding: 12px;
+  border-radius: 4px;
+  border-left: 4px solid #52c41a;
+}
+
+.ticket-resolution p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* 添加评论 */
+.ticket-comment-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.comment-input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.comment-input:focus {
+  outline: none;
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.submit-comment-btn {
+  align-self: flex-end;
+  padding: 8px 16px;
+  background-color: #1890ff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-comment-btn:hover {
+  background-color: #40a9ff;
+}
+
+.submit-comment-btn:active {
+  background-color: #096dd9;
+}
+
+/* 操作按钮 */
+.ticket-actions-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.action-button {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.action-button.primary {
+  background-color: #1890ff;
+  color: #fff;
+}
+
+.action-button.primary:hover {
+  background-color: #40a9ff;
+}
+
+.action-button.secondary {
+  background-color: #52c41a;
+  color: #fff;
+}
+
+.action-button.secondary:hover {
+  background-color: #73d13d;
+}
+
+.action-button.danger {
+  background-color: #ff4d4f;
+  color: #fff;
+}
+
+.action-button.danger:hover {
+  background-color: #ff7875;
+}
+
+/* 优先级样式 */
+.priority-low {
+  color: #52c41a;
+  font-weight: 500;
+}
+
+.priority-medium {
+  color: #faad14;
+  font-weight: 500;
+}
+
+.priority-high {
+  color: #fa541c;
+  font-weight: 500;
+}
+
+.priority-urgent {
+  color: #ff4d4f;
+  font-weight: 500;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .ticket-detail-container {
+    padding: 12px;
+  }
+
+  .ticket-header-section,
+  .ticket-content-section,
+  .ticket-interactions-section,
+  .ticket-resolution-section,
+  .ticket-comment-section,
+  .ticket-actions-section {
+    padding: 12px;
+  }
+
+  .ticket-title {
+    font-size: 16px;
+  }
+
+  .ticket-meta-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .ticket-date-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .interaction-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .action-button {
+    flex: 1 0 100%;
+  }
+}
+
+/* 滚动条样式 */
+.ticket-detail-container {
+  overflow-y: auto;
+}
+
+.ticket-detail-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ticket-detail-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.ticket-detail-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.ticket-detail-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

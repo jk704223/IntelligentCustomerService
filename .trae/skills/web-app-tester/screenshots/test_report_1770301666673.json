@@ -1,0 +1,114 @@
+{
+  "timestamp": "2026-02-05T14:27:46.672Z",
+  "totalTests": 2,
+  "passedTests": 0,
+  "failedTests": 2,
+  "results": [
+    {
+      "name": "Dashboard Navigation",
+      "steps": [
+        {
+          "action": "wait",
+          "status": "fail",
+          "error": "this.page.waitForTimeout is not a function"
+        }
+      ],
+      "expected": "Should load dashboard after login",
+      "status": "fail",
+      "screenshots": []
+    },
+    {
+      "name": "销售开单完整流程 (SALE-CORE-01)",
+      "steps": [
+        {
+          "action": "click",
+          "status": "fail",
+          "error": "Waiting for selector `.business-menu` failed: Waiting failed: 60000ms exceeded"
+        },
+        {
+          "action": "wait",
+          "status": "fail",
+          "error": "this.page.waitForTimeout is not a function"
+        },
+        {
+          "action": "click",
+          "status": "fail",
+          "error": "Waiting for selector `.sales-menu` failed: Waiting failed: 60000ms exceeded"
+        },
+        {
+          "action": "wait",
+          "status": "fail",
+          "error": "this.page.waitForTimeout is not a function"
+        },
+        {
+          "action": "click",
+          "status": "fail",
+          "error": "Waiting for selector `.create-order` failed: Waiting failed: 60000ms exceeded"
+        },
+        {
+          "action": "wait",
+          "status": "fail",
+          "error": "this.page.waitForTimeout is not a function"
+        },
+        {
+          "action": "wait",
+          "status": "fail",
+          "error": "this.page.waitForTimeout is not a function"
+        },
+        {
+          "action": "click",
+          "status": "fail",
+          "error": "Waiting for selector `.business-menu` failed: Waiting failed: 60000ms exceeded"
+        },
+        {
+          "action": "wait",
+          "status": "fail",
+          "error": "this.page.waitForTimeout is not a function"
+        },
+        {
+          "action": "click",
+          "status": "fail",
+          "error": "Waiting for selector `.sales-menu` failed: Waiting failed: 60000ms exceeded"
+        },
+        {
+          "action": "wait",
+          "status": "fail",
+          "error": "this.page.waitForTimeout is not a function"
+        },
+        {
+          "action": "click",
+          "status": "fail",
+          "error": "Waiting for selector `.order-query` failed: Waiting failed: 60000ms exceeded"
+        },
+        {
+          "action": "wait",
+          "status": "fail",
+          "error": "this.page.waitForTimeout is not a function"
+        },
+        {
+          "action": "click",
+          "status": "fail",
+          "error": "Waiting for selector `.archives-menu` failed: Waiting failed: 60000ms exceeded"
+        },
+        {
+          "action": "wait",
+          "status": "fail",
+          "error": "this.page.waitForTimeout is not a function"
+        },
+        {
+          "action": "click",
+          "status": "fail",
+          "error": "Waiting for selector `.print-template` failed: Waiting failed: 60000ms exceeded"
+        },
+        {
+          "action": "wait",
+          "status": "fail",
+          "error": "this.page.waitForTimeout is not a function"
+        }
+      ],
+      "expected": "销售开单完整流程测试通过",
+      "status": "fail",
+      "screenshots": []
+    }
+  ]
+}

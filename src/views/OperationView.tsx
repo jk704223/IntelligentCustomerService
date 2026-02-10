@@ -432,6 +432,12 @@ const OperationView: React.FC<OperationViewProps> = ({ tickets, setTickets }) =>
   const [sessionSummaryVisible, setSessionSummaryVisible] = useState(false);
   const [completedTickets, setCompletedTickets] = useState<string[]>([]);
   const [sessionNotes, setSessionNotes] = useState('');
+  
+  // 创建工单弹窗状态
+  const [createTicketModalVisible, setCreateTicketModalVisible] = useState(false);
+  const [ticketTitle, setTicketTitle] = useState('');
+  const [ticketContent, setTicketContent] = useState('');
+  const [ticketType, setTicketType] = useState('system_issue');
   const [handoverPersons] = useState([
     { value: 'op1', label: '运营A' },
     { value: 'op2', label: '运营B' },
@@ -545,6 +551,53 @@ const OperationView: React.FC<OperationViewProps> = ({ tickets, setTickets }) =>
     setCompletedTickets([]);
     setSessionNotes('');
     setSessionSummaryVisible(true);
+  };
+  
+  // 处理创建工单
+  const handleCreateTicket = () => {
+    if (!ticketTitle.trim()) {
+      message.error('请输入工单标题');
+      return;
+    }
+    if (!ticketContent.trim()) {
+      message.error('请输入工单内容');
+      return;
+    }
+    
+    // 模拟创建工单
+    if (setTickets) {
+      const newTicket = {
+        id: Date.now().toString(),
+        title: ticketTitle,
+        content: ticketContent,
+        customerName: selectedCustomer.name,
+        customerEmail: selectedCustomer.email || 'customer@example.com',
+        status: 'open' as const,
+        type: ticketType as any,
+        createdTime: new Date(),
+        updatedTime: new Date(),
+        lastProcessor: '',
+        lastProcessTime: new Date(),
+      };
+      setTickets(prev => [...prev, newTicket]);
+      message.success(`已为${selectedCustomer.name}创建新工单`);
+      
+      // 发送创建工单的消息
+      sendBotMessage(`已为您创建工单：${ticketTitle}\n工单类型：${
+        ticketType === 'system_issue' ? '系统问题' :
+        ticketType === 'product_suggestion' ? '产品建议' :
+        ticketType === 'training_implementation' ? '培训实施' :
+        ticketType === 'renewal_question' ? '续费疑问' :
+        ticketType === 'issue_escalation' ? '问题升级' :
+        '投诉'
+      }\n我们会尽快处理您的问题。`);
+    }
+    
+    // 关闭弹窗并重置状态
+    setCreateTicketModalVisible(false);
+    setTicketTitle('');
+    setTicketContent('');
+    setTicketType('system_issue');
   };
   
   const handleSaveSessionSummary = () => {
@@ -1376,10 +1429,7 @@ const OperationView: React.FC<OperationViewProps> = ({ tickets, setTickets }) =>
                     <Button type="default" size="small" onClick={handleHandoverClick} style={{ padding: '2px 12px', fontSize: 11 }}>
                       交接
                     </Button>
-                    <Button type="default" size="small" onClick={() => {
-                      // 发起工单逻辑
-                      alert('发起工单功能：为客户创建新工单');
-                    }} style={{ padding: '2px 12px', fontSize: 11 }}>
+                    <Button type="default" size="small" onClick={() => setCreateTicketModalVisible(true)} style={{ padding: '2px 12px', fontSize: 11 }}>
                       发起工单
                     </Button>
                     <Button type="default" size="small" onClick={handleFinishSession} style={{ padding: '2px 12px', fontSize: 11 }}>
@@ -1628,6 +1678,58 @@ const OperationView: React.FC<OperationViewProps> = ({ tickets, setTickets }) =>
           <p style={{ margin: '4px 0 0 0', fontSize: 12, color: '#999' }}>
             2. 数据统计周期为最近7天
           </p>
+        </div>
+      </Modal>
+      
+      {/* 创建工单弹窗 */}
+      <Modal
+        title={`创建工单 - ${selectedCustomer.name}`}
+        open={createTicketModalVisible}
+        footer={[
+          <Button key="cancel" onClick={() => setCreateTicketModalVisible(false)}>
+            取消
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleCreateTicket}>
+            创建工单
+          </Button>,
+        ]}
+        onCancel={() => setCreateTicketModalVisible(false)}
+      >
+        <div style={{ marginBottom: 16 }}>
+          <p style={{ marginBottom: 8 }}>工单标题：</p>
+          <Input
+            placeholder="请输入工单标题"
+            value={ticketTitle}
+            onChange={(e) => setTicketTitle(e.target.value)}
+          />
+        </div>
+        <div style={{ marginBottom: 16 }}>
+          <p style={{ marginBottom: 8 }}>工单类型：</p>
+          <Select
+            style={{ width: '100%' }}
+            value={ticketType}
+            onChange={setTicketType}
+            options={[
+              { value: 'system_issue', label: '系统问题' },
+              { value: 'product_suggestion', label: '产品建议' },
+              { value: 'training_implementation', label: '培训实施' },
+              { value: 'renewal_question', label: '续费疑问' },
+              { value: 'issue_escalation', label: '问题升级' },
+              { value: 'complaint', label: '投诉' },
+            ]}
+          />
+        </div>
+        <div style={{ marginBottom: 16 }}>
+          <p style={{ marginBottom: 8 }}>工单内容：</p>
+          <TextArea
+            rows={4}
+            placeholder="请详细描述问题..."
+            value={ticketContent}
+            onChange={(e) => setTicketContent(e.target.value)}
+          />
+        </div>
+        <div style={{ fontSize: 12, color: '#999' }}>
+          <p>提示：创建工单后，系统会自动通知相关人员进行处理。</p>
         </div>
       </Modal>
       
